@@ -2,19 +2,27 @@ package Assignment3;
 
 public class Clothing extends Item 
 {
-
-	// variables, constructors as necessary
+	private double taxRate;
+	private String state;
 	
-	float calculatePrice () 
-	{
-		float final_price = 0;
-		// Insert price calculation here
-		return final_price;
+	Clothing(String nameC, double priceC, int quantityC, double weightC, char typeC, String stateC){
+		super(nameC, priceC, quantityC, weightC, typeC);
+		state = stateC;
+	}
+	double calculatePrice () 
+	{	double finalPrice = 0;
+		taxRate = .10;
+		for (int i = 0;i < 5; i++){
+			if (state.equals(noSalesTaxStates[i])) taxRate = 0;
+		}
+		finalPrice = price + price * taxRate;
+		finalPrice += 20*weight * (double)quantity + price;
+		return finalPrice;
 	}
 	
 	void printItemAttributes () 
 	{
-		//Print all applicable attributes of this sub-class
+		System.out.println("Name: " + name + " Total price: " + calculatePrice() + " Weight: " + weight + " Quantity: " + quantity + " Shipping state: " + state);
 	}
 	
 

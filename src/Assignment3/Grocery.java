@@ -1,9 +1,21 @@
 package Assignment3;
 
 public class Grocery extends Item {
-	//variables, constructor here
-	
-	//override calculatePrice() if necessary; Implement print methods as necessary	
-	// Only re-implement stuff you cannot get from the superclass (Item)
+	boolean perishable;
+	Grocery(String nameG, double priceG, int quantityG, double weightG, char typeG, boolean perishableG){
+		super(nameG, priceG, quantityG, weightG, typeG);
+		perishable = perishableG;
+	}
+	double calculatePrice(){
+		double finalPrice = price;
+		if (perishable) finalPrice += 20.0 * weight * (double) quantity * 1.2;
+		else finalPrice += 20.0 * weight * (double) quantity;
+		return finalPrice;
+	}
+	void printItemAttributes(){
+		System.out.print("Name: " + name + " Total price: " + calculatePrice() + " Weight: " + weight + " Quantity: " + quantity + " Perishable? ");
+		if(perishable) System.out.print("Y");
+		else System.out.print("N");
+	}
 	
 }
