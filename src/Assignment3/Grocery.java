@@ -2,7 +2,7 @@ package Assignment3;
 
 public class Grocery extends Item {
 	boolean perishable;
-	Grocery(String nameG, double priceG, int quantityG, double weightG, char typeG, boolean perishableG){
+	Grocery(String nameG, double priceG, int quantityG, double weightG, String typeG, boolean perishableG){
 		super(nameG, priceG, quantityG, weightG, typeG);
 		perishable = perishableG;
 	}
@@ -16,6 +16,12 @@ public class Grocery extends Item {
 		System.out.print("Name: " + name + " Total price: " + calculatePrice() + " Weight: " + weight + " Quantity: " + quantity + " Perishable? ");
 		if(perishable) System.out.print("Y");
 		else System.out.print("N");
+	}
+	public boolean isPerishable() {
+		return perishable;
+	}
+	public void setPerishable(boolean perishable) {
+		this.perishable = perishable;
 	}
 	
 }

@@ -5,7 +5,7 @@ public class Clothing extends Item
 	private double taxRate;
 	private String state;
 	
-	Clothing(String nameC, double priceC, int quantityC, double weightC, char typeC, String stateC){
+	Clothing(String nameC, double priceC, int quantityC, double weightC, String typeC, String stateC){
 		super(nameC, priceC, quantityC, weightC, typeC);
 		state = stateC;
 	}
@@ -23,6 +23,18 @@ public class Clothing extends Item
 	void printItemAttributes () 
 	{
 		System.out.println("Name: " + name + " Total price: " + calculatePrice() + " Weight: " + weight + " Quantity: " + quantity + " Shipping state: " + state);
+	}
+	public double getTaxRate() {
+		return taxRate;
+	}
+	public void setTaxRate(double taxRate) {
+		this.taxRate = taxRate;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 	
 

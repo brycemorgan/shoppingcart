@@ -6,7 +6,7 @@ public class Electronics extends Item
 	private double taxRate;
 	private boolean fragile;
 
-	Electronics(String nameE, double priceE, int quantityE, double weightE, char typeE, String stateE, boolean fragileE){
+	Electronics(String nameE, double priceE, int quantityE, double weightE, String typeE, String stateE, boolean fragileE){
 		super(nameE, priceE, quantityE, weightE, typeE);
 		state = stateE;
 		fragile = fragileE;
@@ -27,8 +27,24 @@ public class Electronics extends Item
 		if(fragile) System.out.print("Y");
 		else System.out.print("N");
 	}
-	// Variables, constructors etc. here.
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public double getTaxRate() {
+		return taxRate;
+	}
+	public void setTaxRate(double taxRate) {
+		this.taxRate = taxRate;
+	}
+	public boolean isFragile() {
+		return fragile;
+	}
+	public void setFragile(boolean fragile) {
+		this.fragile = fragile;
+	}
 	
-	//Implement calculate price/print methods as necessary
 
 }
