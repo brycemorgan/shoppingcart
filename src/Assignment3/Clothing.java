@@ -17,7 +17,7 @@ public class Clothing extends Item
 	
 	void printItemAttributes () 
 	{
-		System.out.println("Name: " + name + " Total price: " + calculatePrice() + " Weight: " + weight + " Quantity: " + quantity);
+		System.out.println("Name: " + name + " Total price: " + calculatePrice() + " Weight: " + weight + " Quantity: " + quantity + '\n');
 	}
 	public double getTaxRate() {
 		return taxRate;

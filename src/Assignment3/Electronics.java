@@ -24,8 +24,8 @@ public class Electronics extends Item
 	}
 	void printItemAttributes(){
 		System.out.print("Name: " + name + " Total price: " + calculatePrice() + " Weight: " + weight + " Quantity: " + quantity + " Shipping state: " + state + " Fragile? ");
-		if(fragile) System.out.print("Y");
-		else System.out.print("N");
+		if(fragile) System.out.print("Y"+ '\n');
+		else System.out.print("N"+ '\n');
 	}
 	public String getState() {
 		return state;

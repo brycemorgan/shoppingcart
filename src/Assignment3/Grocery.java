@@ -14,8 +14,8 @@ public class Grocery extends Item {
 	}
 	void printItemAttributes(){
 		System.out.print("Name: " + name + " Total price: " + calculatePrice() + " Weight: " + weight + " Quantity: " + quantity + " Perishable? ");
-		if(perishable) System.out.print("Y");
-		else System.out.print("N");
+		if(perishable) System.out.print("Y"+ '\n');
+		else System.out.print("N"+ '\n');
 	}
 	public boolean isPerishable() {
 		return perishable;
