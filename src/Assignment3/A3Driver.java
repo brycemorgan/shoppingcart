@@ -26,12 +26,10 @@ public class A3Driver {
 				commands.add(s);
 			}
 		} catch (FileNotFoundException e) {
-			System.err.println("Error: File not found. Exiting...");
-			e.printStackTrace();
+			System.out.println("Error: File not found. Exiting...");
 			System.exit(-1);
 		} catch (IOException e) {
-			System.err.println("Error: IO exception. Exiting...");
-			e.printStackTrace();
+			System.out.println("Error: IO exception. Exiting...");
 			System.exit(-1);
 		}
 
@@ -41,126 +39,108 @@ public class A3Driver {
 		// Parse input, take appropriate actions.
 		for (int x = 0; x < commands.size(); x++) {
 			Scanner scanner = new Scanner(commands.get(x));
-			String command = scanner.next();
-			if (!isValidOperation(command)) {
-				System.out.println("invalid operation");
-				continue;
-			}
-			if (command.equals("insert"))
+			
+			String operation = getOperation(scanner);
+			
+			if (operation.equals(OPERATIONS[0])) {
 				insert(scanner);
-			if (command.equals("search"))
+			} else if (operation.equals(OPERATIONS[1])) {
 				search(scanner);
-			if (command.equals("delete"))
+			} else if (operation.equals(OPERATIONS[2])) {
 				delete(scanner);
-			if (command.equals("update"))
+			} else if (operation.equals(OPERATIONS[3])) {
 				update(scanner);
-			if (command.equals("print"))
+			} else if (operation.equals(OPERATIONS[4])) {
 				print(scanner);
-			/*
-			 * if (!isValidCategory(scanner)) { System.out.println(
-			 * "invalid category"); continue; }
-			 * 
-			 * if (!isValidName(scanner)) { System.out.println("invalid name");
-			 * continue; }
-			 * 
-			 * if (!isValidPrice(scanner)) { System.out.println("invalid price"
-			 * ); continue; }
-			 * 
-			 * if (!isValidQuantity(scanner)) { System.out.println(
-			 * "invalid quantity"); continue; }
-			 * 
-			 * if (!isValidWeight(scanner)) { System.out.println(
-			 * "invalid weight"); continue; }
-			 * 
-			 * if (!isValidPerishable(scanner)) { System.out.println(
-			 * "invalid perishable"); continue; }
-			 * 
-			 * if (!isValidState(scanner)) { System.out.println("invalid state"
-			 * ); continue; }
-			 */
+			}
+
 			scanner.close();
 		}
 
 		// General code example for how to iterate an array list. You will have
 		// to modify this heavily, to suit your needs.
-/*		Iterator<Item> i = shoppingCart.iterator();
-		while (i.hasNext()) {
-			Item temp = i.next();
-			temp.calculatePrice();
-			temp.printItemAttributes();
-
-			// This (above) works because of polymorphism: a determination is
-			// made at runtime,
-			// based on the inherited class type, as to which method is to be
-			// invoked. Eg: If it is an instance
-			// of Grocery, it will invoke the calculatePrice () method defined
-			// in Grocery.
-		}
-		*/
+		/*
+		 * Iterator<Item> i = shoppingCart.iterator(); while (i.hasNext()) {
+		 * Item temp = i.next(); temp.calculatePrice();
+		 * temp.printItemAttributes();
+		 * 
+		 * // This (above) works because of polymorphism: a determination is //
+		 * made at runtime, // based on the inherited class type, as to which
+		 * method is to be // invoked. Eg: If it is an instance // of Grocery,
+		 * it will invoke the calculatePrice () method defined // in Grocery. }
+		 */
 	}
 
-
 	public static void insert(Scanner s) {
-		String category = s.next();
-		if (!isValidCategory(category)) {
-			System.out.println("invalid category");
+		String category = getCategory(s);
+		if (category.equals(""))
 			return;
-		}
-		String name = s.next();
-		double price = s.nextDouble();
-		if (!isValidPrice(price)){
-			System.out.println("invalid price");
+		
+		String name = getName(s);
+		if (name.equals(""))
 			return;
-		}
-		int quantity = (int)s.nextDouble();
-		if (!isValidQuantity(quantity)){
-			System.out.println("invalid quantity");
+		
+		double price = getPrice(s);
+		if (price == -1)
 			return;
-		}
-		int weight = (int)s.nextDouble();
-		if (!isValidWeight(weight)){
-			System.out.println("invalid weight");
+		
+		int quantity = getQuantity(s);
+		if (quantity == -1) 
 			return;
-		}
+		
+		int weight = getWeight(s);
+		if (weight == -1)
+			return;
+		
 		if (category.equals("clothing")) {
-			Clothing tempItem = new Clothing(name,price,quantity,weight,category);
+			Clothing tempItem = new Clothing(name, price, quantity, weight,
+					category);
 			shoppingCart.add(tempItem);
 		}
+		
 		if (category.equals("electronics")) {
-			String fragile = s.next();
-			if (!isValidFragile(fragile)){
-				System.out.println("invalid fragile");
+			String fragile = getFragile(s);
+			if (fragile.equals("")) {
 				return;
 			}
+			
 			boolean fragileBool = true;
-			if(fragile.equals("NF")) fragileBool = false;
-			String state = s.next();
-			if (!isValidState(state)){
-				System.out.println("invalid fragile");
+			if (fragile.equals("NF"))
+				fragileBool = false;
+			
+			String state = getState(s);
+			if (state.equals("")) 
 				return;
-			}
-			Electronics tempItem = new Electronics(name,price,quantity,weight,category,state,fragileBool);
+			
+			Electronics tempItem = new Electronics(name, price, quantity,
+					weight, category, state, fragileBool);
 			shoppingCart.add(tempItem);
 		}
+		
 		if (category.equals("groceries")) {
-			String perishable = s.next();
-			if (!isValidPerishable(perishable)){
-				System.out.println("invalid perishable");
+			String perishable = getPerishable(s);
+			if (perishable.equals("")) 
 				return;
-			}
+			
 			boolean perishableBool = true;
-			if(perishable.equals("NP")) perishableBool = false;
-			Grocery tempItem = new Grocery(name,price,quantity,weight,category,perishableBool);
+			if (perishable.equals("NP"))
+				perishableBool = false;
+			
+			Grocery tempItem = new Grocery(name, price, quantity, weight,
+					category, perishableBool);
 			shoppingCart.add(tempItem);
 		}
 	}
 
 	public static void search(Scanner s) {
 		int quantity = 0;
-		String searchName = s.next();
-		for (Iterator<Item> i = shoppingCart.iterator(); i.hasNext();){
+		String searchName = getName(s);
+		if (searchName.equals(""))
+			return;
+		
+		for (Iterator<Item> i = shoppingCart.iterator(); i.hasNext();) {
 			Item temp = i.next();
-			if (temp.name.equals(searchName)){
+			if (temp.name.equals(searchName)) {
 				quantity += temp.quantity;
 			}
 		}
@@ -169,10 +149,13 @@ public class A3Driver {
 
 	public static void delete(Scanner s) {
 		int index = 0, count = 0;
-		String searchName = s.next();
-		for (Iterator<Item> i = shoppingCart.iterator(); i.hasNext(); count++){
+		String searchName = getName(s);
+		if (searchName.equals(""))
+			return;
+		
+		for (Iterator<Item> i = shoppingCart.iterator(); i.hasNext(); count++) {
 			Item temp = i.next();
-			if (temp.name.equals(searchName)){
+			if (temp.name.equals(searchName)) {
 				index = count;
 				break;
 			}
@@ -181,11 +164,18 @@ public class A3Driver {
 	}
 
 	public static void update(Scanner s) {
-		String searchName = s.next();
-		int newQuantity = s.nextInt();
-		for (Iterator<Item> i = shoppingCart.iterator(); i.hasNext();){
+		String searchName = getName(s);
+		if (searchName.equals(""))
+			return;
+		
+		int newQuantity = getQuantity(s);
+		if (newQuantity == -1) {
+			return;
+		}
+		
+		for (Iterator<Item> i = shoppingCart.iterator(); i.hasNext();) {
 			Item temp = i.next();
-			if (temp.name.equals(searchName)){
+			if (temp.name.equals(searchName)) {
 				temp.quantity = newQuantity;
 			}
 		}
@@ -202,179 +192,141 @@ public class A3Driver {
 		System.out.println("Final cost: " + finalPrice);
 	}
 
-	private static final String[] OPERATIONS = { "insert", "search", "delete", "update", "print" };
+	private static final String[] OPERATIONS = { "insert", "search", "delete",
+			"update", "print" };
 
-	private static boolean isValidOperation(Scanner scanner) {
+	private static String getOperation(Scanner scanner) {
 		String operation = "";
 		try {
 			operation = scanner.next();
 		} catch (Exception e) {
-			return false;
+			System.out.println("missing operation");
+			return "";
 		}
 
 		for (int x = 0; x < OPERATIONS.length; x++) {
 			if (operation.equals(OPERATIONS[x])) {
-				return true;
+				return operation;
 			}
 		}
-		return false;
+		System.out.println("not a valid operation");
+		return "";
 	}
 
-	private static boolean isValidOperation(String operation) {
-		for (int x = 0; x < OPERATIONS.length; x++) {
-			if (operation.equals(OPERATIONS[x])) {
-				return true;
-			}
-		}
-		return false;
-	}
+	private static final String[] CATEGORIES = { "clothing", "groceries",
+			"electronics" };
 
-	private static final String[] CATEGORIES = { "clothing", "groceries", "electronics" };
-
-	private static boolean isValidCategory(Scanner scanner) {
+	private static String getCategory(Scanner scanner) {
 		String category = "";
 		try {
 			category = scanner.next();
 		} catch (Exception e) {
-			return false;
+			System.out.println("missing category field");
+			return "";
 		}
 
 		for (int x = 0; x < CATEGORIES.length; x++) {
 			if (category.equals(CATEGORIES[x])) {
-				return true;
+				return category;
 			}
 		}
-		return false;
+		
+		System.out.println("not a valid category");
+		return "";
 	}
 
-	private static boolean isValidCategory(String category) {
-		for (int x = 0; x < CATEGORIES.length; x++) {
-			if (category.equals(CATEGORIES[x])) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private static boolean isValidName(Scanner scanner) {
+	private static String getName(Scanner scanner) {
 		String name = "";
 		try {
 			name = scanner.next();
 		} catch (Exception e) {
-			return false;
+			System.out.println("missing name field");
+			return "";
 		}
-		return true;
+		return name;
 	}
 
-	private static boolean isValidPrice(Scanner scanner) {
+	private static double getPrice(Scanner scanner) {
 		double price = 0;
 		try {
 			price = scanner.nextDouble();
 		} catch (Exception e) {
-			return false;
+			System.out.println("missing price field");
+			return -1;
 		}
 		if (price < 0) {
-			return false;
+			System.out.println("Price must be positive");
+			return -1;
 		}
-		return true;
+		return price;
 	}
 
-	private static boolean isValidPrice(double price) {
-		if (price < 0) {
-			return false;
-		}
-		return true;
-	}
-
-	private static boolean isValidQuantity(Scanner scanner) {
+	private static int getQuantity(Scanner scanner) {
 		int quantity = 0;
 		try {
 			quantity = scanner.nextInt();
 		} catch (Exception e) {
-			return false;
+			System.out.println("missing quantity field or quantity is not integer");
+			return -1;
 		}
 		if (quantity < 0) {
-			return false;
+			System.out.println("Quantity must be positive");
+			return -1;
 		}
-		return true;
+		return quantity;
 	}
 
-	private static boolean isValidQuantity(int quantity) {
-		if (quantity < 0) {
-			return false;
-		}
-		return true;
-	}
-
-	private static boolean isValidWeight(Scanner scanner) {
+	private static int getWeight(Scanner scanner) {
 		int weight = 0;
 		try {
 			weight = scanner.nextInt();
 		} catch (Exception e) {
-			return false;
+			System.out.println("missing weight integer field");
+			return -1;
 		}
 		if (weight < 0) {
-			return false;
+			System.out.println("weight must be positive");
+			return -1;
 		}
-		return true;
+		return weight;
 	}
-
-	private static boolean isValidWeight(int weight) {
-		if (weight < 0) {
-			return false;
-		}
-		return true;
-	}
-
-	private static boolean isValidPerishable(Scanner scanner) {
+	
+	private static String getPerishable(Scanner scanner) {
 		String perishable = "";
 		try {
 			perishable = scanner.next();
 		} catch (Exception e) {
-			return false;
+			System.out.println("missing perishable field");
+			return "";
 		}
 
 		if (perishable.equals("NP")) {
-			return true;
+			return perishable;
 		} else if (perishable.equals("P")) {
-			return true;
+			return perishable;
 		}
-		return false;
+		
+		System.out.println("Perishable field must be P or NP");
+		return "";
 	}
 
-	private static boolean isValidPerishable(String perishable) {
-
-		if (perishable.equals("NP")) {
-			return true;
-		} else if (perishable.equals("P")) {
-			return true;
-		}
-		return false;
-	}
-
-	private static boolean isValidFragile(Scanner scanner) {
+	private static String getFragile(Scanner scanner) {
 		String fragile = "";
 		try {
 			fragile = scanner.next();
 		} catch (Exception e) {
-			return false;
+			System.out.println("missing fragile field");
+			return "";
 		}
 
 		if (fragile.equals("F")) {
-			return true;
+			return fragile;
 		} else if (fragile.equals("NF")) {
-			return true;
+			return fragile;
 		}
-		return false;
-	}
-
-	private static boolean isValidFragile(String fragile) {
-		if (fragile.equals("F")) {
-			return true;
-		} else if (fragile.equals("NF")) {
-			return true;
-		}
-		return false;
+		
+		System.out.println("Only F or NF");
+		return "";
 	}
 
 	private static final String[] STATES = { "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID",
@@ -382,29 +334,21 @@ public class A3Driver {
 			"NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV",
 			"WI", "WY" };
 
-	private static boolean isValidState(Scanner scanner) {
+	private static String getState(Scanner scanner) {
 		String state = "";
 		try {
 			state = scanner.next();
 		} catch (Exception e) {
-			return false;
+			System.out.println("missing state field");
+			return "";
 		}
 
 		for (int x = 0; x < STATES.length; x++) {
 			if (state.equals(STATES[x])) {
-				return true;
+				return state;
 			}
 		}
-		return false;
+		System.out.println("invalid state");
+		return "";
 	}
-
-	private static boolean isValidState(String state) {
-		for (int x = 0; x < STATES.length; x++) {
-			if (state.equals(STATES[x])) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 }
