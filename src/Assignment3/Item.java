@@ -9,12 +9,12 @@ public abstract class Item
 	protected String name;
 	protected double price;
 	protected int quantity;
-	protected double weight;
+	protected int weight;
 	protected String type;
 	protected String[] allStates = {"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", 
 			"MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"};
 	protected String[] noSalesTaxStates = {"TX", "NM", "VA", "AZ", "AK"};
-	Item(String nameI, double priceI, int quantityI, double weightI, String typeI){
+	Item(String nameI, double priceI, int quantityI, int weightI, String typeI){
 		name = nameI;
 		price = priceI;
 		quantity = quantityI;
@@ -44,7 +44,7 @@ public abstract class Item
 	public double getWeight() {
 		return weight;
 	}
-	public void setWeight(double weight) {
+	public void setWeight(int weight) {
 		this.weight = weight;
 	}
 	public String getType() {

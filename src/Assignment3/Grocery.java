@@ -2,7 +2,7 @@ package Assignment3;
 
 public class Grocery extends Item {
 	boolean perishable;
-	Grocery(String nameG, double priceG, int quantityG, double weightG, String typeG, boolean perishableG){
+	Grocery(String nameG, double priceG, int quantityG, int weightG, String typeG, boolean perishableG){
 		super(nameG, priceG, quantityG, weightG, typeG);
 		perishable = perishableG;
 	}

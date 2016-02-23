@@ -6,7 +6,7 @@ public class Electronics extends Item
 	private double taxRate;
 	private boolean fragile;
 
-	Electronics(String nameE, double priceE, int quantityE, double weightE, String typeE, String stateE, boolean fragileE){
+	Electronics(String nameE, double priceE, int quantityE, int weightE, String typeE, String stateE, boolean fragileE){
 		super(nameE, priceE, quantityE, weightE, typeE);
 		state = stateE;
 		fragile = fragileE;
