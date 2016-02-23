@@ -168,16 +168,15 @@ public class A3Driver {
 	}
 
 	public static void delete(Scanner s) {
-		int index = 0, count = 0;
+		int count = 0;
 		String searchName = s.next();
 		for (Iterator<Item> i = shoppingCart.iterator(); i.hasNext(); count++){
 			Item temp = i.next();
 			if (temp.name.equals(searchName)){
-				index = count;
-				break;
+				shoppingCart.remove(count);
+
 			}
 		}
-		shoppingCart.remove(index);
 	}
 
 	public static void update(Scanner s) {
