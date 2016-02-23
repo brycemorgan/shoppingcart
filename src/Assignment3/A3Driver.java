@@ -150,7 +150,7 @@ public class A3Driver {
 
 	public static void delete(Scanner s) {
 
-		int index = 0, count = 0;
+		int count = 0;
 		String searchName = getName(s);
 		if (searchName.equals(""))
 			return;
@@ -158,7 +158,7 @@ public class A3Driver {
 		for (Iterator<Item> i = shoppingCart.iterator(); i.hasNext(); count++) {
 			Item temp = i.next();
 			if (temp.name.equals(searchName)) {
-				shoppingCart.remove(count);
+				i.remove();
 
 			}
 		}
