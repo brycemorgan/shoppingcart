@@ -10,10 +10,12 @@ import javax.swing.JOptionPane;
 
 public class A3Driver {
 	public static ArrayList<Item> shoppingCart = new ArrayList<Item>();
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		if (args.length != 1) {
-			System.err.println("Error: Incorrect number of command line arguments");
+			System.err
+					.println("Error: Incorrect number of command line arguments");
 			System.exit(-1);
 		}
 
@@ -34,14 +36,13 @@ public class A3Driver {
 		}
 
 		// Stub for arraylist.
-		
 
 		// Parse input, take appropriate actions.
 		for (int x = 0; x < commands.size(); x++) {
 			Scanner scanner = new Scanner(commands.get(x));
-			
+
 			String operation = getOperation(scanner);
-			
+
 			if (operation.equals(OPERATIONS[0])) {
 				insert(scanner);
 			} else if (operation.equals(OPERATIONS[1])) {
@@ -75,57 +76,57 @@ public class A3Driver {
 		String category = getCategory(s);
 		if (category.equals(""))
 			return;
-		
+
 		String name = getName(s);
 		if (name.equals(""))
 			return;
-		
+
 		double price = getPrice(s);
 		if (price == -1)
 			return;
-		
+
 		int quantity = getQuantity(s);
-		if (quantity == -1) 
+		if (quantity == -1)
 			return;
-		
+
 		int weight = getWeight(s);
 		if (weight == -1)
 			return;
-		
+
 		if (category.equals("clothing")) {
 			Clothing tempItem = new Clothing(name, price, quantity, weight,
 					category);
 			shoppingCart.add(tempItem);
 		}
-		
+
 		if (category.equals("electronics")) {
 			String fragile = getFragile(s);
 			if (fragile.equals("")) {
 				return;
 			}
-			
+
 			boolean fragileBool = true;
 			if (fragile.equals("NF"))
 				fragileBool = false;
-			
+
 			String state = getState(s);
-			if (state.equals("")) 
+			if (state.equals(""))
 				return;
-			
+
 			Electronics tempItem = new Electronics(name, price, quantity,
 					weight, category, state, fragileBool);
 			shoppingCart.add(tempItem);
 		}
-		
+
 		if (category.equals("groceries")) {
 			String perishable = getPerishable(s);
-			if (perishable.equals("")) 
+			if (perishable.equals(""))
 				return;
-			
+
 			boolean perishableBool = true;
 			if (perishable.equals("NP"))
 				perishableBool = false;
-			
+
 			Grocery tempItem = new Grocery(name, price, quantity, weight,
 					category, perishableBool);
 			shoppingCart.add(tempItem);
@@ -137,7 +138,7 @@ public class A3Driver {
 		String searchName = getName(s);
 		if (searchName.equals(""))
 			return;
-		
+
 		for (Iterator<Item> i = shoppingCart.iterator(); i.hasNext();) {
 			Item temp = i.next();
 			if (temp.name.equals(searchName)) {
@@ -148,31 +149,31 @@ public class A3Driver {
 	}
 
 	public static void delete(Scanner s) {
+
 		int index = 0, count = 0;
 		String searchName = getName(s);
 		if (searchName.equals(""))
 			return;
-		
+
 		for (Iterator<Item> i = shoppingCart.iterator(); i.hasNext(); count++) {
 			Item temp = i.next();
 			if (temp.name.equals(searchName)) {
-				index = count;
-				break;
+				shoppingCart.remove(count);
+
 			}
 		}
-		shoppingCart.remove(index);
 	}
 
 	public static void update(Scanner s) {
 		String searchName = getName(s);
 		if (searchName.equals(""))
 			return;
-		
+
 		int newQuantity = getQuantity(s);
 		if (newQuantity == -1) {
 			return;
 		}
-		
+
 		for (Iterator<Item> i = shoppingCart.iterator(); i.hasNext();) {
 			Item temp = i.next();
 			if (temp.name.equals(searchName)) {
@@ -230,7 +231,7 @@ public class A3Driver {
 				return category;
 			}
 		}
-		
+
 		System.out.println("not a valid category");
 		return "";
 	}
@@ -266,7 +267,8 @@ public class A3Driver {
 		try {
 			quantity = scanner.nextInt();
 		} catch (Exception e) {
-			System.out.println("missing quantity field or quantity is not integer");
+			System.out
+					.println("missing quantity field or quantity is not integer");
 			return -1;
 		}
 		if (quantity < 0) {
@@ -290,7 +292,7 @@ public class A3Driver {
 		}
 		return weight;
 	}
-	
+
 	private static String getPerishable(Scanner scanner) {
 		String perishable = "";
 		try {
@@ -305,7 +307,7 @@ public class A3Driver {
 		} else if (perishable.equals("P")) {
 			return perishable;
 		}
-		
+
 		System.out.println("Perishable field must be P or NP");
 		return "";
 	}
@@ -324,15 +326,17 @@ public class A3Driver {
 		} else if (fragile.equals("NF")) {
 			return fragile;
 		}
-		
+
 		System.out.println("Only F or NF");
 		return "";
 	}
 
-	private static final String[] STATES = { "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID",
-			"IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
-			"NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV",
-			"WI", "WY" };
+	private static final String[] STATES = { "AL", "AK", "AZ", "AR", "CA",
+			"CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS",
+			"KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE",
+			"NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA",
+			"RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI",
+			"WY" };
 
 	private static String getState(Scanner scanner) {
 		String state = "";
