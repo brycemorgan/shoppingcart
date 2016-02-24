@@ -1,8 +1,10 @@
 insert clothing shirt 20.50 1 1
-
 insert electronics PS3 300 1 5.2 F NM 
 insert groceries cabbage 2.00 5 1 NP
 delete cabbage
+insert groceries cabbage 2.00 10 1 NP
+insert electronics computer 2000.00 1 10 NF TX
+insert groceries IWANTCABBAGE 2.00 1 1 NP
 search shirt
 update shirt 10
 print

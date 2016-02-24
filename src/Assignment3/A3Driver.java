@@ -183,6 +183,7 @@ public class A3Driver {
 	}
 
 	public static void print(Scanner s) {
+		Collections.sort(shoppingCart);
 		Iterator<Item> i = shoppingCart.iterator();
 		double finalPrice = 0;
 		while (i.hasNext()) {
@@ -281,7 +282,7 @@ public class A3Driver {
 	private static int getWeight(Scanner scanner) {
 		int weight = 0;
 		try {
-			weight = scanner.nextInt();
+			weight = (int)scanner.nextDouble();
 		} catch (Exception e) {
 			System.out.println("missing weight integer field");
 			return -1;

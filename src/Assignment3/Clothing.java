@@ -1,6 +1,6 @@
 package Assignment3;
 
-public class Clothing extends Item 
+public class Clothing extends Item
 {
 	private double taxRate;
 	

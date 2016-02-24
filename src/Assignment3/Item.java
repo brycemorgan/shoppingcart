@@ -1,6 +1,6 @@
 package Assignment3;
 
-public abstract class Item 
+public abstract class Item implements Comparable<Item>
 {
 //Declare variables for this class. Think about its type: public, protected or private?
 
@@ -20,6 +20,9 @@ public abstract class Item
 		quantity = quantityI;
 		weight = weightI;
 		type = typeI;
+	}
+	public int compareTo(Item o){
+		return this.name.compareTo(o.name);
 	}
 	abstract double calculatePrice();
 	abstract void printItemAttributes();
