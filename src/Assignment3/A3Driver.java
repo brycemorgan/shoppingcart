@@ -180,6 +180,7 @@ public class A3Driver {
 				temp.quantity = newQuantity;
 			}
 		}
+		System.out.println("Number of " + searchName + "(s): " + newQuantity);
 	}
 
 	public static void print(Scanner s) {
@@ -266,7 +267,7 @@ public class A3Driver {
 	private static int getQuantity(Scanner scanner) {
 		int quantity = 0;
 		try {
-			quantity = scanner.nextInt();
+			quantity = (int)scanner.nextDouble();
 		} catch (Exception e) {
 			System.out
 					.println("missing quantity field or quantity is not integer");

@@ -7,16 +7,12 @@ public class Grocery extends Item {
 		perishable = perishableG;
 	}
 	double calculatePrice(){
-		double finalPrice = price;
+		double finalPrice = price*(double)quantity;
 		if (perishable) finalPrice += 20.0 * weight * (double) quantity * 1.2;
 		else finalPrice += 20.0 * weight * (double) quantity;
 		return finalPrice;
 	}
-	void printItemAttributes(){
-		System.out.print("Name: " + name + " Total price: " + calculatePrice() + " Weight: " + weight + " Quantity: " + quantity + " Perishable? ");
-		if(perishable) System.out.print("Y"+ '\n');
-		else System.out.print("N"+ '\n');
-	}
+
 	public boolean isPerishable() {
 		return perishable;
 	}

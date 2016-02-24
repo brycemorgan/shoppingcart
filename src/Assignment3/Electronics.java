@@ -17,16 +17,12 @@ public class Electronics extends Item
 		for (int i = 0;i < 5; i++){
 			if (state.equals(noSalesTaxStates[i])) taxRate = 0;
 		}
-		finalPrice = price + price * taxRate;
+		finalPrice = price*(double)quantity*(1+ taxRate);
 		if(fragile) finalPrice += 20.0 * weight * (double) quantity * 1.2;
 		else finalPrice += 20.0 * weight * (double) quantity;
 		return finalPrice;
 	}
-	void printItemAttributes(){
-		System.out.print("Name: " + name + " Total price: " + calculatePrice() + " Weight: " + weight + " Quantity: " + quantity + " Shipping state: " + state + " Fragile? ");
-		if(fragile) System.out.print("Y"+ '\n');
-		else System.out.print("N"+ '\n');
-	}
+
 	public String getState() {
 		return state;
 	}

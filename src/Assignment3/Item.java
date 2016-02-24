@@ -25,7 +25,9 @@ public abstract class Item implements Comparable<Item>
 		return this.name.compareTo(o.name);
 	}
 	abstract double calculatePrice();
-	abstract void printItemAttributes();
+	void printItemAttributes(){
+		System.out.println("Name: " + name + " Total price: " + calculatePrice() + " Quantity: " + quantity +  " Total price: " + calculatePrice());
+	}
 	public String getName() {
 		return name;
 	}

@@ -11,14 +11,10 @@ public class Clothing extends Item
 	{	double finalPrice = 0;
 		taxRate = .10;
 		finalPrice = price + price * taxRate;
-		finalPrice += 20*weight * (double)quantity + price;
+		finalPrice += 20*weight * (double)quantity + price * (double)quantity;
 		return finalPrice;
 	}
 	
-	void printItemAttributes () 
-	{
-		System.out.println("Name: " + name + " Total price: " + calculatePrice() + " Weight: " + weight + " Quantity: " + quantity + '\n');
-	}
 	public double getTaxRate() {
 		return taxRate;
 	}

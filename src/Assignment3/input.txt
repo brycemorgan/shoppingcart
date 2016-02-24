@@ -4,6 +4,7 @@ insert groceries cabbage 2.00 5 1 NP
 delete cabbage
 insert groceries cabbage 2.00 10 1 NP
 insert electronics computer 2000.00 1 10 NF TX
+insert electronics newComputer 2000.00 1 10 NF NY
 insert groceries IWANTCABBAGE 2.00 1 1 NP
 search shirt
 update shirt 10
